@@ -14,15 +14,15 @@ def create_app():
     app.config["SQLALCHEMY_DATABASE_URI"] = smgr_config.PG_DB_CONNECTION_SQLALCHEMY_URI
     db.init_app(app)
 
-    from .views import views
-    from .auth import auth
-    from .scores import scores
-    from .courses import courses
+    from .views import views_blueprint
+    from .auth import auth_blueprint
+    from .scores import scores_blueprint
+    from .courses import courses_blueprint
 
-    app.register_blueprint(views, url_prefix='/')
-    app.register_blueprint(auth, url_prefix='/')
-    app.register_blueprint(scores, url_prefix='/')
-    app.register_blueprint(courses, url_prefix='/')
+    app.register_blueprint(views_blueprint, url_prefix='/')
+    app.register_blueprint(auth_blueprint, url_prefix='/')
+    app.register_blueprint(scores_blueprint, url_prefix='/')
+    app.register_blueprint(courses_blueprint, url_prefix='/')
 
     from .models import User
 

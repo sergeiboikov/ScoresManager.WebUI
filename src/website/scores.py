@@ -3,20 +3,17 @@ import json
 import config.smgr_config as cfg
 import dbcontext.dbcontext as db
 from flask_login import login_required, current_user
-from .models import Course
 
-scores = Blueprint('scores', __name__)
+scores_blueprint = Blueprint('scores', __name__)
 smgr_config = cfg.Config(r"src\config\smgr_config.yaml")
 dbcontext = db.DBcontext(smgr_config)
 api_schema = smgr_config.PG_DB_API_SCHEMA
 
-
-@scores.route("/scores", methods=["GET", "POST"])
+@scores_blueprint.route("/scores", methods=["GET", "POST"])
 @login_required
 def scores_info():
-    courses = dbcontext.run_query(f"SELECT * FROM {api_schema}.udf_get_courses_by_user_id({current_user.id});")
-    course_id = courses
-    print(f"courses={courses}")
+    courses = dbcontext.run_query(f"SELECT * FROM {api_schema}.udf_get_courses_by_user_id({current_user.id});")[0]
+
     if request.method == "POST":
         course = request.form.get("course")
         task = request.form.get("task")

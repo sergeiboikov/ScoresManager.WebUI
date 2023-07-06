@@ -5,12 +5,12 @@ from flask_login import login_required, current_user
 from .models import Course
 
 
-courses = Blueprint("courses", __name__)
+courses_blueprint = Blueprint("courses", __name__)
 
 smgr_config = cfg.Config(r"src\config\smgr_config.yaml")
 
 
-@courses.route("/courses", methods=["GET", "POST"])
+@courses_blueprint.route("/courses", methods=["GET", "POST"])
 @login_required
 def courses_info():
     courses = Course.query.all()

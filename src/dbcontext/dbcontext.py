@@ -9,7 +9,7 @@ class DBcontext():
         conn = psycopg2.connect(self.connectionstring)
         cur = conn.cursor()
         cur.execute(query)
-        res = cur.fetchall()
+        res = cur.fetchone()
         conn.close()
         return (res)
 
