@@ -1,0 +1,27 @@
+appName: SCORES-MANAGER-UI-FLASK
+appShortName: SMGR
+logLevel: WARN
+authors:
+  - Andrey Potapov
+  - Sergei Boikov  
+
+paths:
+  workingpath: 'D:\GIT\MSBI.LAB\_RNT\ScoresManager.WebUI'
+  excluded_paths: ''
+
+flags:
+  debugmode: False
+
+databases:
+  postgres:
+    host: rc1a-yllcr299ehv5rd4a.mdb.yandexcloud.net
+    port: 6432
+    sslmode: verify-full
+    dbname: ScoresManagerDB
+    user: mentor
+    username: mentor
+    target_session_attrs: read-write    
+    password: ENVOS_SMGR_VALUE_01 #get from env variable
+    working_schema: lab
+    api_schema: mentor
+    

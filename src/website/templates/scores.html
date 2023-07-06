@@ -1,0 +1,171 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
+%}
+<form method="POST">
+  <h3 align="center">Scores</h3>
+
+  <div class="form-group">
+    <label for="course">Course</label>
+    <select class="form-select" aria-label="Select Course">
+      {% for course in courses %}
+        <option>{{ course.course_name }}</option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="task">Task</label>
+    <select class="form-select" aria-label="Select Task">
+      <option selected>Task 1</option>
+      <option value="1">Task 2</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="subtask">Task</label>
+    <select class="form-select" aria-label="Select Subtask">
+      <option selected>Subtask 1</option>
+      <option value="1">Subtask 2</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="reviewer">Reviewer</label>
+    <select class="form-select" aria-label="Select Reviewer">
+      <option selected>Reviewer 1</option>
+      <option value="1">Reviewer 2</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="student">Student</label>
+    <select class="form-select" aria-label="Select Student">
+      <option selected>Student 1</option>
+      <option value="1">Student 2</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="max_score">Max Score</label>
+    <input
+      type="text"
+      class="form-control"
+      id="max_score"
+      name="max_score"
+      value="5"
+      readonly
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="score">Score</label>
+    <input
+      type="text"
+      class="form-control"
+      id="score"
+      name="score"
+      placeholder="Enter score"
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="name_conv">Naming convention</label>
+    <input
+      type="text"
+      class="form-control"
+      id="name_conv"
+      name="name_conv"
+      placeholder="Enter bonuses for naming convention"
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="readability">Readability</label>
+    <input
+      type="text"
+      class="form-control"
+      id="readability"
+      name="readability"
+      placeholder="Enter bonuses for Readability"
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="sarg">Using SARG predicates</label>
+    <input
+      type="text"
+      class="form-control"
+      id="sarg"
+      name="sarg"
+      placeholder="Enter bonuses for using SARG predicates"
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="schema_name">Using schema name</label>
+    <input
+      type="text"
+      class="form-control"
+      id="schema_name"
+      name="schema_name"
+      placeholder="Enter bonuses for using schema name"
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="aliases">Using aliases</label>
+    <input
+      type="text"
+      class="form-control"
+      id="aliases"
+      name="aliases"
+      placeholder="Enter bonuses for using aliases"
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="determ_sorting">Using deterministic sorting</label>
+    <input
+      type="text"
+      class="form-control"
+      id="determ_sorting"
+      name="determ_sorting"
+      placeholder="Enter bonuses for using deterministic sorting"
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="ontime">Ontime</label>
+    <input
+      type="text"
+      class="form-control"
+      id="ontime"
+      name="ontime"
+      placeholder="Enter bonuses for ontime"
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="extra">Extra bonus</label>
+    <input
+      type="text"
+      class="form-control"
+      id="extra"
+      name="extra"
+      placeholder="Enter extra bonus"
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="comment">Enter comment</label>
+    <input
+      type="text"
+      class="form-control"
+      id="comment"
+      name="comment"
+      placeholder="Enter comment"
+    />
+  </div>
+  <br />
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock %}

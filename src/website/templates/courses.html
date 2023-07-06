@@ -1,0 +1,49 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
+%}
+<h1 align="center">Courses</h1>
+
+<ul class="list-group list-group-flush" id="courses">
+  {% for course in courses %}
+    <li class="list-group-item">{{ course.name }}</li>
+  {% endfor %}
+</ul>
+
+<h3 align="center">Add a new course</h3>
+
+<form method="POST">
+  <div class="form-group">
+    <label for="name">Course Name</label>
+    <input
+      type="text"
+      class="form-control"
+      id="name"
+      name="name"
+      placeholder="Enter course name"
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="datestart">Datestart</label>
+    <input
+      type="date"
+      class="form-control"
+      id="datestart"
+      name="datestart"
+      placeholder="Enter datestart"
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="datefinish">Datestart</label>
+    <input
+      type="date"
+      class="form-control"
+      id="datefinish"
+      name="datefinish"
+      placeholder="Enter datefinish"
+    />
+  </div>
+  <br />
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock %}
