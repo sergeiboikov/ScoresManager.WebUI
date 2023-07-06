@@ -14,7 +14,7 @@ api_schema = smgr_config.PG_DB_API_SCHEMA
 @scores.route("/scores", methods=["GET", "POST"])
 @login_required
 def scores_info():
-    courses = dbcontext.run_query(f"SELECT course_id, course_name FROM {api_schema}.udf_get_courses_by_user_id({current_user.id});").
+    courses = dbcontext.run_query(f"SELECT * FROM {api_schema}.udf_get_courses_by_user_id({current_user.id});")
     course_id = courses
     print(f"courses={courses}")
     if request.method == "POST":
