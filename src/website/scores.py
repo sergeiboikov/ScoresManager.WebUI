@@ -13,7 +13,6 @@ api_schema = smgr_config.PG_DB_API_SCHEMA
 @login_required
 def scores_info():
     courses = dbcontext.run_query(f"SELECT * FROM {api_schema}.udf_get_courses_by_user_id({current_user.id});")[0]
-
     if request.method == "POST":
         course = request.form.get("course")
         task = request.form.get("task")
@@ -56,3 +55,11 @@ def scores_info():
             dbcontext.run_procedure(f"CALL mentor.usp_score_insert('[{json_data}]');")
             flash("Scores were saved successfully!", category="success")
     return render_template("scores.html", user=current_user, courses=courses)
+
+
+@scores_blueprint.route("/get_tasks", methods=["GET", "POST"])
+@login_required
+def get_tasks():
+    course_id = request.args.get('courseId')
+    tasks = dbcontext.run_query(f"SELECT * FROM {api_schema}.udf_get_tasks_by_course_id({course_id});")[0]
+    return json.dumps(tasks)

@@ -1,36 +1,98 @@
 {% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
 %}
+
+<script>
+  $(document).ready(function () {
+    $('#course').change(function () {
+      var courseId = $(this).val();
+      updateTaskDropdown(courseId);
+    });
+
+    $('#task').change(function () {
+      var taskId = $(this).val();
+      updateSubtaskDropdown(taskId);
+    });
+
+    // Update task dropdown when the course field is updated
+    function updateTaskDropdown(courseId) {
+      $.ajax({
+        url: '/get_tasks',    // Flask route to fetch tasks for selected course
+        data: {
+          courseId: courseId
+        },
+        success: function (response) {
+          $('#task').empty();  // Clear the current task options
+          if (response) {
+            var tasks = JSON.parse(response);
+            tasks.forEach(function (task) {
+              $('#task').append(`<option value="${task.task_id}">${task.task_name}</option>`);
+            });
+          } else {
+            $('#task').append('<option disabled>No tasks found</option>');
+          }
+        },
+        error: function (error) {
+          console.log(error);
+        }
+      });
+    }
+
+    // Update subtask dropdown when the task field is updated
+    function updateSubtaskDropdown(taskId) {
+      $.ajax({
+        url: '/get_subtasks',    // Flask route to fetch subtasks for selected task
+        data: {
+          taskId: taskId
+        },
+        success: function (response) {
+          $('#task').empty();  // Clear the current task options
+          if (response) {
+            var tasks = JSON.parse(response);
+            tasks.forEach(function (task) {
+              $('#task').append(`<option value="${task.task_id}">${task.task_name}</option>`);
+            });
+          } else {
+            $('#task').append('<option disabled>No tasks found</option>');
+          }
+        },
+        error: function (error) {
+          console.log(error);
+        }
+      });
+    }
+  });
+</script>
+
 <form method="POST">
   <h3 align="center">Scores</h3>
 
   <div class="form-group">
     <label for="course">Course</label>
-    <select class="form-select" aria-label="Select Course">
+    <select class="form-select" id="course" name="course" aria-label="Select Course">
+      <option selected disabled>Select a Course</option>
       {% for course in courses %}
-        <option value="{{ course.course_id }}">{{ course.course_name }}</option>
+      <option value="{{ course.course_id }}">{{ course.course_name }}</option>
       {% endfor %}
     </select>
   </div>
 
   <div class="form-group">
     <label for="task">Task</label>
-    <select class="form-select" aria-label="Select Task">
-      <option selected>Task 1</option>
-      <option value="1">Task 2</option>
+    <select class="form-select" id="task" name="task">
+      <option selected disabled>Select a Course</option>
     </select>
   </div>
 
   <div class="form-group">
     <label for="subtask">Subtask</label>
-    <select class="form-select" aria-label="Select Subtask">
-      <option selected>Subtask 1</option>
-      <option value="1">Subtask 2</option>
+    <select class="form-select" id="subtask" name="subtask">
+      <option selected disabled>Select a Task</option>
     </select>
   </div>
 
   <div class="form-group">
     <label for="reviewer">Reviewer</label>
-    <select class="form-select" aria-label="Select Reviewer">
+    <select class="form-select" id="reviewer" name="reviewer">
       <option selected>Reviewer 1</option>
       <option value="1">Reviewer 2</option>
     </select>
@@ -38,132 +100,69 @@
 
   <div class="form-group">
     <label for="student">Student</label>
-    <select class="form-select" aria-label="Select Student">
-      <option selected>Student 1</option>
-      <option value="1">Student 2</option>
+    <select class="form-select" id="student" name="student">
+      <option selected disabled>Select a Course</option>
     </select>
   </div>
 
   <div class="form-group">
     <label for="max_score">Max Score</label>
-    <input
-      type="text"
-      class="form-control"
-      id="max_score"
-      name="max_score"
-      value="5"
-      readonly
-    />
+    <input type="text" class="form-control" id="max_score" name="max_score" value="5" readonly />
   </div>
 
   <div class="form-group">
     <label for="score">Score</label>
-    <input
-      type="text"
-      class="form-control"
-      id="score"
-      name="score"
-      placeholder="Enter score"
-    />
+    <input type="text" class="form-control" id="score" name="score" placeholder="Enter score" />
   </div>
 
   <div class="form-group">
     <label for="name_conv">Naming convention</label>
-    <input
-      type="text"
-      class="form-control"
-      id="name_conv"
-      name="name_conv"
-      placeholder="Enter bonuses for naming convention"
-    />
+    <input type="text" class="form-control" id="name_conv" name="name_conv"
+      placeholder="Enter bonuses for naming convention" />
   </div>
 
   <div class="form-group">
     <label for="readability">Readability</label>
-    <input
-      type="text"
-      class="form-control"
-      id="readability"
-      name="readability"
-      placeholder="Enter bonuses for Readability"
-    />
+    <input type="text" class="form-control" id="readability" name="readability"
+      placeholder="Enter bonuses for Readability" />
   </div>
 
   <div class="form-group">
     <label for="sarg">Using SARG predicates</label>
-    <input
-      type="text"
-      class="form-control"
-      id="sarg"
-      name="sarg"
-      placeholder="Enter bonuses for using SARG predicates"
-    />
+    <input type="text" class="form-control" id="sarg" name="sarg"
+      placeholder="Enter bonuses for using SARG predicates" />
   </div>
 
   <div class="form-group">
     <label for="schema_name">Using schema name</label>
-    <input
-      type="text"
-      class="form-control"
-      id="schema_name"
-      name="schema_name"
-      placeholder="Enter bonuses for using schema name"
-    />
+    <input type="text" class="form-control" id="schema_name" name="schema_name"
+      placeholder="Enter bonuses for using schema name" />
   </div>
 
   <div class="form-group">
     <label for="aliases">Using aliases</label>
-    <input
-      type="text"
-      class="form-control"
-      id="aliases"
-      name="aliases"
-      placeholder="Enter bonuses for using aliases"
-    />
+    <input type="text" class="form-control" id="aliases" name="aliases" placeholder="Enter bonuses for using aliases" />
   </div>
 
   <div class="form-group">
     <label for="determ_sorting">Using deterministic sorting</label>
-    <input
-      type="text"
-      class="form-control"
-      id="determ_sorting"
-      name="determ_sorting"
-      placeholder="Enter bonuses for using deterministic sorting"
-    />
+    <input type="text" class="form-control" id="determ_sorting" name="determ_sorting"
+      placeholder="Enter bonuses for using deterministic sorting" />
   </div>
 
   <div class="form-group">
     <label for="ontime">Ontime</label>
-    <input
-      type="text"
-      class="form-control"
-      id="ontime"
-      name="ontime"
-      placeholder="Enter bonuses for ontime"
-    />
+    <input type="text" class="form-control" id="ontime" name="ontime" placeholder="Enter bonuses for ontime" />
   </div>
 
   <div class="form-group">
     <label for="extra">Extra bonus</label>
-    <input
-      type="text"
-      class="form-control"
-      id="extra"
-      name="extra"
-      placeholder="Enter extra bonus"
-    />
+    <input type="text" class="form-control" id="extra" name="extra" placeholder="Enter extra bonus" />
   </div>
 
   <div class="form-group">
     <label for="comment">Enter comment</label>
-    <input
-      type="text"
-      class="form-control"
-      id="comment"
-      name="comment"
-      placeholder="Enter comment"
-    />
+    <input type="text" class="form-control" id="comment" name="comment" placeholder="Enter comment" />
   </div>
   <br />
   <button type="submit" class="btn btn-primary">Submit</button>
