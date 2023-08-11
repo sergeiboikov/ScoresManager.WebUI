@@ -2,16 +2,17 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from config import smgr_config as cfg
+import constants as cst
 
-smgr_config = cfg.Config(r"src/config/smgr_config.yaml")
+smgr_cfg = cfg.Config(cst.SMGR_CFG_FILE)
 
 db = SQLAlchemy()
 
 
 def create_app():
     app = Flask(__name__)
-    app.config["SECRET_KEY"] = "asdadfsdfe"
-    app.config["SQLALCHEMY_DATABASE_URI"] = smgr_config.PG_DB_CONNECTION_SQLALCHEMY_URI
+    app.config['SECRET_KEY'] = cst.SMGR_APP_KEY
+    app.config['SQLALCHEMY_DATABASE_URI'] = smgr_cfg.PG_DB_CONNECTION_SQLALCHEMY_URI
     db.init_app(app)
 
     from .views import views_blueprint

@@ -14,10 +14,10 @@ flags:
 
 databases:
   postgres:
-    host: rc1a-yllcr299ehv5rd4a.mdb.yandexcloud.net
+    host: ENVOS_SMGR_VALUE_02
     port: 6432
     sslmode: verify-full
-    dbname: ScoresManagerDB
+    dbname: ENVOS_SMGR_VALUE_03
     user: mentor
     username: mentor
     target_session_attrs: read-write    

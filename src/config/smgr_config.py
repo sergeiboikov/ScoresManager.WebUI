@@ -1,9 +1,9 @@
-
-import ruamel.yaml as yaml
 import os
+import ruamel.yaml as yaml
+import constants as cst
 
 class Config(object):
-    
+
     def __init__(self, yaml_config_file):
         with open(yaml_config_file) as stream:
             try:
@@ -11,7 +11,7 @@ class Config(object):
             except yaml.YAMLError as exc:
                 print(exc)
 
-        self.CFG_APPNAME = "SCORES-MANAGER-UI-FLASK"
+        self.CFG_APPNAME = cst.SMGR_CFG_APPNAME
         self.CFG_APPSHORTNAME = yaml_config['appShortName']
 
         assert self.CFG_APPNAME == yaml_config['appName']
@@ -40,9 +40,3 @@ class Config(object):
         self.PG_DB_CONNECTION_SQLALCHEMY_URI = f"postgresql://postgres:{self.PG_DB_PWD}@{self.PG_DB_HOST}:{self.PG_DB_PORT}/{self.PG_DB_DBNAME}"
         self.PG_DB_WORKING_SCHEMA = yaml_config['databases']['postgres']['working_schema']
         self.PG_DB_API_SCHEMA = yaml_config['databases']['postgres']['api_schema']
-
-
-if __name__ == '__main__':
-
-    config = Config(r"D:\GIT\MSBI.LAB\_RNT\ScoresManager.WebUI\src\config\smgr_config.yaml")
-    print(config.PG_DB_CONNECTION_STRING)
