@@ -2,6 +2,7 @@ import os
 import ruamel.yaml as yaml
 import constants as cst
 
+
 class Config(object):
 
     def __init__(self, yaml_config_file):
@@ -27,7 +28,7 @@ class Config(object):
         self.PG_DB_DBNAME = yaml_config['databases']['postgres']['dbname']
         self.PG_DB_USER = yaml_config['databases']['postgres']['user']
         self.PG_DB_TARGET_SESSION_ATTRS = yaml_config['databases']['postgres']['target_session_attrs']
-        self.PG_DB_PWD = os.environ[yaml_config['databases']['postgres']['password']] 
+        self.PG_DB_PWD = os.environ[yaml_config['databases']['postgres']['password']]
         self.PG_DB_CONNECTION_STRING = f"""
             host={self.PG_DB_HOST}
             port={self.PG_DB_PORT}
@@ -37,6 +38,7 @@ class Config(object):
             password={self.PG_DB_PWD}
             target_session_attrs={self.PG_DB_TARGET_SESSION_ATTRS}
             """
-        self.PG_DB_CONNECTION_SQLALCHEMY_URI = f"postgresql://postgres:{self.PG_DB_PWD}@{self.PG_DB_HOST}:{self.PG_DB_PORT}/{self.PG_DB_DBNAME}"
+        self.PG_DB_CONNECTION_SQLALCHEMY_URI = \
+            f"postgresql://postgres:{self.PG_DB_PWD}@{self.PG_DB_HOST}:{self.PG_DB_PORT}/{self.PG_DB_DBNAME}"
         self.PG_DB_WORKING_SCHEMA = yaml_config['databases']['postgres']['working_schema']
         self.PG_DB_API_SCHEMA = yaml_config['databases']['postgres']['api_schema']

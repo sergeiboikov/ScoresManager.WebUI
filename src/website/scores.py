@@ -17,7 +17,6 @@ def scores_info():
     courses = dbcontext.run_query(f'SELECT * FROM {api_schema}.udf_get_courses_by_user_id({current_user.id});')[0]
     if request.method == 'POST':
         course = request.form.get('course')
-        task = request.form.get('task')
         subtask = request.form.get('subtask')
         reviewer = request.form.get('reviewer')
         student = request.form.get('student')
@@ -81,7 +80,8 @@ def get_subtasks():
 @login_required
 def get_reviewer():
     course_id = request.args.get('courseId')
-    reviewer = dbcontext.run_query(f'SELECT * FROM {api_schema}.udf_get_reviewer_by_course_user_id({course_id}, {current_user.id});')[0][0]
+    reviewer = \
+        dbcontext.run_query(f'SELECT * FROM {api_schema}.udf_get_reviewer_by_course_user_id({course_id}, {current_user.id});')[0][0]
     return json.dumps(reviewer)
 
 

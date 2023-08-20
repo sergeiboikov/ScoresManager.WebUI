@@ -4,4 +4,4 @@ ignore =
     # N812: lowercase imported as non lowercase
     N812
 max-complexity = 10
-max-line-length = 120
+max-line-length = 140

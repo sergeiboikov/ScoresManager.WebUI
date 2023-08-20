@@ -1,6 +1,5 @@
 from . import db
 from flask_login import UserMixin
-from sqlalchemy.sql import func
 from config import smgr_config as cfg
 import constants as cst
 
@@ -31,7 +30,8 @@ class Connection(BaseModel):
     __tablename__ = 'connection'
     connection_id = db.Column(db.Integer, primary_key=True)
     connection_string = db.Column(db.String(250))
-    connection_type_id = db.Column(db.Integer, db.ForeignKey(f'{smgr_cfg.PG_DB_WORKING_SCHEMA}.connection_type.connection_type_id'))
+    connection_type_id = \
+        db.Column(db.Integer, db.ForeignKey(f'{smgr_cfg.PG_DB_WORKING_SCHEMA}.connection_type.connection_type_id'))
 
 
 class CheckScriptType(BaseModel):
@@ -45,8 +45,10 @@ class CheckScript(BaseModel):
     check_script_id = db.Column(db.Integer, primary_key=True)
     text = db.Column(db.String(5000))
     description = db.Column(db.String(5000))
-    connection_id = db.Column(db.Integer, db.ForeignKey(f'{smgr_cfg.PG_DB_WORKING_SCHEMA}.connection.connection_id'))
-    check_script_type_id = db.Column(db.Integer, db.ForeignKey(f'{smgr_cfg.PG_DB_WORKING_SCHEMA}.check_script_type.check_script_type_id'))
+    connection_id = \
+        db.Column(db.Integer, db.ForeignKey(f'{smgr_cfg.PG_DB_WORKING_SCHEMA}.connection.connection_id'))
+    check_script_type_id = \
+        db.Column(db.Integer, db.ForeignKey(f'{smgr_cfg.PG_DB_WORKING_SCHEMA}.check_script_type.check_script_type_id'))
 
 
 class City(BaseModel):
@@ -63,7 +65,6 @@ class CourseStaff(BaseModel):
     user_id = db.Column(db.Integer, db.ForeignKey(f'{smgr_cfg.PG_DB_WORKING_SCHEMA}.user.id'))
     user_type_id = db.Column(db.Integer, db.ForeignKey(f'{smgr_cfg.PG_DB_WORKING_SCHEMA}.user_type.user_type_id'))
     status_id = db.Column(db.Integer, db.ForeignKey(f'{smgr_cfg.PG_DB_WORKING_SCHEMA}.status.status_id'))
-
 
 
 class Course(BaseModel):
@@ -121,7 +122,8 @@ class Subtask(BaseModel):
     name = db.Column(db.String(250))
     description = db.Column(db.String(500))
     topic_id = db.Column(db.Integer, db.ForeignKey(f'{smgr_cfg.PG_DB_WORKING_SCHEMA}.topic.topic_id'))
-    check_script_id = db.Column(db.Integer, db.ForeignKey(f'{smgr_cfg.PG_DB_WORKING_SCHEMA}.check_script.check_script_id'))
+    check_script_id = \
+        db.Column(db.Integer, db.ForeignKey(f'{smgr_cfg.PG_DB_WORKING_SCHEMA}.check_script.check_script_id'))
     max_score = db.Column(db.Numeric(8, 2))
 
 

@@ -21,6 +21,6 @@ databases:
     user: postgres
     username: postgres
     target_session_attrs: read-write    
-    password: ENVOS_SMGR_VALUE_01 #get from env variable
+    password: ENVOS_SMGR_VALUE_01
     working_schema: lab
     api_schema: mentor
