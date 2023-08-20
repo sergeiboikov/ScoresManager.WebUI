@@ -8,7 +8,7 @@
 5. Install all the necessary libraries from requirements: `pip install -r requirements.txt`
 
 ## Configuration
-1. Edit the `smgr_config.yaml` file:
+1. Edit the `smgr_config_DEV.yml` file:
    - Change the value for `workingpath` to your root folder with project
    - Change the values for `host`, `username` to actual
 2. Create Environment variable with name `ENVOS_SMGR_VALUE_01` and value: password for ScoresManagerDB database
