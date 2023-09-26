@@ -142,7 +142,7 @@
   <h3 align="center">Scores</h3>
 
   <div class="form-group">
-    <label for="course">Course</label>
+    <label for="course">Course *</label>
     <select class="form-select" id="course" name="course" aria-label="Select Course">
       <option selected disabled>Select a Course</option>
       {% for course in courses %}
@@ -152,28 +152,28 @@
   </div>
 
   <div class="form-group">
-    <label for="task">Task</label>
+    <label for="task">Task *</label>
     <select class="form-select" id="task" name="task">
       <option selected disabled>Select a Course</option>
     </select>
   </div>
 
   <div class="form-group">
-    <label for="subtask">Subtask</label>
+    <label for="subtask">Subtask *</label>
     <select class="form-select" id="subtask" name="subtask">
       <option selected disabled>Select a Task</option>
     </select>
   </div>
 
   <div class="form-group">
-    <label for="reviewer">Reviewer</label>
+    <label for="reviewer">Reviewer *</label>
     <select class="form-select" id="reviewer" name="reviewer">
       <option selected disabled>Select a Course</option>
     </select>
   </div>
 
   <div class="form-group">
-    <label for="student">Student</label>
+    <label for="student">Student *</label>
     <select class="form-select" id="student" name="student">
       <option selected disabled>Select a Course</option>
     </select>
@@ -185,8 +185,18 @@
   </div>
 
   <div class="form-group">
-    <label for="score">Score</label>
+    <label for="score">Score *</label>
     <input type="number" required class="form-control" id="score" name="score" placeholder="Enter score" />
+  </div>
+
+  <div class="form-group">
+    <label for="ontime">Ontime *</label>
+    <input type="number" class="form-control" id="ontime" name="ontime" placeholder="Enter bonuses for ontime" />
+  </div>
+
+  <div class="form-group">
+    <label for="extra">Extra bonus *</label>
+    <input type="number" class="form-control" id="extra" name="extra" placeholder="Enter extra bonus" />
   </div>
 
   <div class="form-group">
@@ -225,17 +235,7 @@
   </div>
 
   <div class="form-group">
-    <label for="ontime">Ontime</label>
-    <input type="number" class="form-control" id="ontime" name="ontime" placeholder="Enter bonuses for ontime" />
-  </div>
-
-  <div class="form-group">
-    <label for="extra">Extra bonus</label>
-    <input type="number" class="form-control" id="extra" name="extra" placeholder="Enter extra bonus" />
-  </div>
-
-  <div class="form-group">
-    <label for="comment">Enter comment</label>
+    <label for="comment">Comment</label>
     <input type="text" class="form-control" id="comment" name="comment" placeholder="Enter comment" />
   </div>
   <br />
