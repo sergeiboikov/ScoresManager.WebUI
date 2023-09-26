@@ -22,3 +22,4 @@ Flask web application for ScoresManagerDB
 ## Execution
 1. Run application: `python app.py`
 2. Open in browser `http://127.0.0.1:5000/`
+3. For login enter your email and password
