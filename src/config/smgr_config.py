@@ -17,16 +17,11 @@ class Config(object):
 
         assert self.CFG_APPNAME == yaml_config['appName']
 
-        self.CFG_WORKING_PATH = yaml_config['paths']['workingpath']
-
-        if not os.path.exists(self.CFG_WORKING_PATH):
-            os.makedirs(self.CFG_WORKING_PATH)
-
-        self.PG_DB_HOST = yaml_config['databases']['postgres']['host']
-        self.PG_DB_PORT = yaml_config['databases']['postgres']['port']
+        self.PG_DB_HOST = os.environ[yaml_config['databases']['postgres']['host']]
+        self.PG_DB_PORT = os.environ[yaml_config['databases']['postgres']['port']]
         self.PG_DB_SSLMODE = yaml_config['databases']['postgres']['sslmode']
-        self.PG_DB_DBNAME = yaml_config['databases']['postgres']['dbname']
-        self.PG_DB_USER = yaml_config['databases']['postgres']['user']
+        self.PG_DB_DBNAME = os.environ[yaml_config['databases']['postgres']['dbname']]
+        self.PG_DB_USER = os.environ[yaml_config['databases']['postgres']['user']]
         self.PG_DB_TARGET_SESSION_ATTRS = yaml_config['databases']['postgres']['target_session_attrs']
         self.PG_DB_PWD = os.environ[yaml_config['databases']['postgres']['password']]
         self.PG_DB_CONNECTION_STRING = f"""
@@ -39,6 +34,6 @@ class Config(object):
             target_session_attrs={self.PG_DB_TARGET_SESSION_ATTRS}
             """
         self.PG_DB_CONNECTION_SQLALCHEMY_URI = \
-            f"postgresql://postgres:{self.PG_DB_PWD}@{self.PG_DB_HOST}:{self.PG_DB_PORT}/{self.PG_DB_DBNAME}"
+            f"postgresql://{self.PG_DB_USER}:{self.PG_DB_PWD}@{self.PG_DB_HOST}:{self.PG_DB_PORT}/{self.PG_DB_DBNAME}?sslmode={self.PG_DB_SSLMODE}"
         self.PG_DB_WORKING_SCHEMA = yaml_config['databases']['postgres']['working_schema']
         self.PG_DB_API_SCHEMA = yaml_config['databases']['postgres']['api_schema']
