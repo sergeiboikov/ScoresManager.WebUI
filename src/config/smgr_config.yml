@@ -2,17 +2,16 @@ appName: SCORES-MANAGER-UI-FLASK
 appShortName: SMGR
 logLevel: WARN
 authors:
-  - Sergei Boikov  
+  - Sergei Boikov
 
 databases:
   postgres:
     host: ENVOS_SMGR_VALUE_02
     port: ENVOS_SMGR_VALUE_04
-    sslmode: verify-full
+    sslmode: disable  # disable, verify-full
     dbname: ENVOS_SMGR_VALUE_03
     user: ENVOS_SMGR_VALUE_06
-    target_session_attrs: read-write    
+    target_session_attrs: read-write
     password: ENVOS_SMGR_VALUE_01
     working_schema: lab
     api_schema: mentor
-    
