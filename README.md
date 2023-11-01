@@ -18,6 +18,7 @@ Flask web application for ScoresManagerDB
    - `ENVOS_SMGR_VALUE_03` - Database name (For example, `ScoresManagerDB`)
    - `ENVOS_SMGR_VALUE_06` - Username (For example, `mentor`)
    - `ENVOS_SMGR_VALUE_01` - User password
+3. Restart computer
 
 ## Execution
 1. Run application: `python app.py`
